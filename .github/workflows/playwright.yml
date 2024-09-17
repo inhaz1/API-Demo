@@ -1,6 +1,12 @@
 name: Sirius Automation tests
 on:
   workflow_dispatch:
+  workflow_call:
+    secrets:
+      GH_PACKAGE_TOKEN:
+        required: true
+env:
+  GH_PACKAGE_TOKEN: ${{ secrets.GH_PACKAGE_TOKEN }}
 jobs:
   test:
     timeout-minutes: 60
@@ -10,8 +16,10 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
-    - name: Install dependencies
-      run: npm ci
+    - run: |
+        echo $GH_PACKAGE_TOKEN
+        ls | grep package-lock.json
+        npm ci --ignore-scripts
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
