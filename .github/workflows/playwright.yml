@@ -1,4 +1,4 @@
-name: Sirius Automation tests
+name: Automation tests
 on:
   workflow_dispatch:
   workflow_call:
