@@ -1,31 +1,29 @@
-
 import { test as baseTest } from '@anaconda/playwright-utils';
 import { LoginPage } from '@pages/login-page-class';
 import { ProductsPage } from '@pages/products-page-class';
 import { MiniCart } from '@pages/mini-cart-class';
-import { ReleaseAPI } from '@pages/api/release-api';
+import { API } from '@pages/api/api';
 
 // Extend the built-in test fixtures with your custom fixtures
 export const test = baseTest.extend<{
   loginPage: LoginPage;
   productsPage: ProductsPage;
   miniCartPage: MiniCart;
-  releaseAPI: ReleaseAPI;
+  api: API;
 }>({
   // Initialize your page objects here
-  loginPage: async ({}: any, use: (arg0: LoginPage) => any) => {
+  loginPage: async ({}, use) => {
     await use(new LoginPage());
   },
-  productsPage: async ({}: any, use: (arg0: ProductsPage) => any) => {
+  productsPage: async ({}, use) => {
     await use(new ProductsPage());
   },
-  miniCartPage: async ({}: any, use: (arg0: MiniCart) => any) => {
+  miniCartPage: async ({}, use) => {
     await use(new MiniCart());
   },
-  releaseAPI: async ({}: any, use: (arg0: ReleaseAPI) => any) => {
-    await use(new ReleaseAPI());
+  api: async ({}, use) => {
+    await use(new API());
   },
 });
 
 export const expect = test.expect;
-
